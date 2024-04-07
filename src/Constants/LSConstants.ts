@@ -1,0 +1,1 @@
+export const LS_USER_TOKEN :string = 'user_token';
