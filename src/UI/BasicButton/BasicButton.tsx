@@ -2,7 +2,7 @@ import React from 'react';
 import {StyledButton} from './styled';
 
 interface IMyButton {
-  onClick: (e: React.MouseEvent<HTMLButtonElement> | any) => void,
+  onClick: (e: React.MouseEvent<HTMLButtonElement>) => void,
   size: 'sm' | 'md' | 'lg',
   text: string,
   disabled?: boolean,

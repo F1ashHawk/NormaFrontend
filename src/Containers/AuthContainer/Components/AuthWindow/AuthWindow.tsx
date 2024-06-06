@@ -8,7 +8,7 @@ interface AuthWindowProps {
 
 }
 
-const AuthWindow :React.FC<AuthWindowProps> = ({}) => {
+const AuthWindow :React.FC<AuthWindowProps> = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -39,7 +39,7 @@ const AuthWindow :React.FC<AuthWindowProps> = ({}) => {
   return (
     <AuthWindowWrapper>
       <AuthSelector>
-        <AuthSelectorButton disabled={location.pathname === '/login'} onClick={() => handleChangeAuthMode('signIn')}>Войти</AuthSelectorButton>
+        <AuthSelectorButton disabled={location.pathname === '/login'} onClick={() => handleChangeAuthMode('signIn')}>Вход</AuthSelectorButton>
         <AuthSelectorButton disabled={location.pathname === '/register'} onClick={() => handleChangeAuthMode('signUp')}>Регистрация</AuthSelectorButton>
       </AuthSelector>
       <Routes>

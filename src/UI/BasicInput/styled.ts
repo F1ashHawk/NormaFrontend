@@ -14,7 +14,7 @@ export const StyledLabel = styled.label<IThemeProvider & IStyledInput>`
 
   font-family: ${props => props.theme.font_style.font_family};
   font-weight: ${props => props.theme.font_style.font_weight.regular};
-  font-size: ${props => props.theme.font_sizes.content};
+  font-size: 18px;
 `;
 
 export const StyledInput = styled.input<IThemeProvider & IStyledInput>`
@@ -24,7 +24,7 @@ export const StyledInput = styled.input<IThemeProvider & IStyledInput>`
 
   font-family: ${props => props.theme.font_style.font_family};
   font-weight: ${props => props.theme.font_style.font_weight.regular};
-  font-size: ${props => props.theme.font_sizes.content};
+  font-size: 18px;
   color: ${props => props.theme.colors.black};
 
   border: 1px solid ${props => props.theme.colors.grey_semi};

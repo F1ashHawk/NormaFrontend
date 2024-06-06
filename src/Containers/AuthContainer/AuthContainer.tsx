@@ -1,11 +1,27 @@
 import React from 'react';
 import {AuthPageWrapper} from './styled.ts';
-import AuthModule from './Modules/AuthModule/AuthModule.tsx';
+import {AuthFormBlock, AuthLogo, AuthLogoBlock, StyledAuthPage} from './styled.ts';
+import AuthWindow from './Components/AuthWindow/AuthWindow.tsx';
+
+export interface IUserData {
+  username: string,
+  password: string,
+  retryPassword?: string,
+  authMode: 'singIn' | 'singUp'
+}
 
 const AuthContainer :React.FC = () => {
   return (
     <AuthPageWrapper>
-      <AuthModule />
+      <StyledAuthPage>
+        <AuthLogoBlock>
+          <AuthLogo>
+          </AuthLogo>
+        </AuthLogoBlock>
+        <AuthFormBlock>
+          <AuthWindow/>
+        </AuthFormBlock>
+      </StyledAuthPage>
     </AuthPageWrapper>
   );
 };

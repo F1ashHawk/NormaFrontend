@@ -9,7 +9,8 @@ interface UserAuthData {
 }
 
 interface AuthResponse {
-  auth_token: string;
+  access: string;
+  refresh: string;
 }
 
 const saveToken = (token: string) => {
@@ -26,7 +27,7 @@ export const AuthApi = createApi({
   endpoints: (builder) => ({
     authorization: builder.mutation<AuthResponse, UserAuthData>({
       query: ({email, password}) => ({
-        url: '/api/auth/token/login/',
+        url: '/token/',
         method: 'post',
         body: {email, password},
       }),
@@ -36,7 +37,7 @@ export const AuthApi = createApi({
 
           console.log(response);
           if ('data' in response) {
-            saveToken(response.data.auth_token);
+            saveToken(response.data.access);
           }
           dispatch(setAuthenticated(true));
         } catch (error: any) {

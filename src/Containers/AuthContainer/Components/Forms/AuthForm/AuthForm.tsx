@@ -11,7 +11,7 @@ const AuthForm :React.FC= () => {
   const [password, setPassword] = useState('');
   const [passwordVisibility, setPasswordVisibility] = useState(false);
 
-  const [authorization, {}] = useAuthorizationMutation();
+  const [authorization] = useAuthorizationMutation();
 
   const navigate = useNavigate()
 
@@ -39,7 +39,7 @@ const AuthForm :React.FC= () => {
       authorization({email, password})
         .unwrap()
         .then((result) => {
-          if (result.auth_token) {
+          if (result.access) {
             navigate('/')
           }
         }).catch((error) => {
@@ -53,9 +53,6 @@ const AuthForm :React.FC= () => {
         }
       })
     }
-
-
-    console.log('submit');
   }
 
   return (
@@ -68,11 +65,11 @@ const AuthForm :React.FC= () => {
             fieldError={false}
             value={email}
             onChange={handleSetEmail}
-            placeholder={'Email Address'}
+            placeholder={'Адрес эл.почты'}
           />
           <BasicAuthInput
             type="password"
-            placeholder={"Password"}
+            placeholder={"Пароль"}
             onChange={handleSetPassword}
             value={password}
             fieldError={false}

@@ -1,6 +1,6 @@
 import React from 'react';
 import {RadioButtonBlock, RadioButtonInput, RadioButtonLabel} from './styled';
-import HelpButton from '../../Pages/CreateCampaignPage/Components/HelpButton';
+import HelpButton from '../../Modules/CreateCampaignPage/Components/HelpButton';
 
 interface IBasicRadioRowProps {
   name: string;
