@@ -8,10 +8,28 @@ import {
   NewOrderWrapper
 } from '../../styled.ts';
 import {useAppSelector} from '../../../../Hooks/redux/useAppSelector.ts';
+import {IOrderInterface, useCreateNewOrderMutation} from '../../../../Store/API/order.api.ts';
 
 const NewOrderSubmitStep :React.FC = () => {
   const {title, info, date, address, cost, comment} = useAppSelector(state => state.orderSlice)
 
+  const [sendNewOrder] = useCreateNewOrderMutation();
+
+  const handleSendNewOrder = () => {
+    const formObject :IOrderInterface = {
+      author: 0,
+      address: address,
+      date: date,
+      cost: cost,
+      tags: title,
+      description: info
+    }
+
+    sendNewOrder(formObject).unwrap()
+      .then((result) => {
+        console.log(result);
+      })
+  }
 
   return (
     <NewOrderWrapper>
@@ -42,7 +60,7 @@ const NewOrderSubmitStep :React.FC = () => {
           <NewOrderSubmitText>{comment}</NewOrderSubmitText>
         </NewOrderSubmitItem>
       }
-      <NewOrderSubmitButton>Подтвердить</NewOrderSubmitButton>
+      <NewOrderSubmitButton onClick={handleSendNewOrder}>Подтвердить</NewOrderSubmitButton>
     </NewOrderWrapper>
   );
 };

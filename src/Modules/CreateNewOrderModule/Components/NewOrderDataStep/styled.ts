@@ -51,6 +51,10 @@ export const DataInput  = styled.input<IThemeProvider>`
   font-size: 18px;
   
   border-radius: 19px;
+  
+  &[data-in-error='true'] {
+    outline: 1px solid ${props => props.theme.colors.secondary_red};
+  }
 `;
 
 export const DataTextArea  = styled.textarea`

@@ -8,24 +8,11 @@ import SpecialistsListModule from '../../Modules/SpecialistsListModule/Specialis
 
 const ClientView = () => {
   const CLIENT_ROUTES = [
-    {
-      path: '/',
-      component: <ClientMainPage/>
-    },
-    {
-      path: '/profile',
-      component: <ClientProfileModule />
-    },
-    {
-      path: '/new-order/:step?',
-      component: <CreateNewOrderModule />
-    },
-    {
-      path: '/specialists',
-      component: <SpecialistsListModule />
-    }
+    {path: '/', component: <ClientMainPage/>},
+    {path: '/profile/*', component: <ClientProfileModule />},
+    {path: '/new-order/:step?', component: <CreateNewOrderModule />},
+    {path: '/specialists', component: <SpecialistsListModule />}
   ]
-
   return (
     <ClientViewContainer>
       <ClientHeader />

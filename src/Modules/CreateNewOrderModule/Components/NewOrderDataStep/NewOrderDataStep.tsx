@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   DataContainer,
   DataInput,
@@ -15,6 +15,8 @@ import BasicButton from '../../../../UI/BasicButton';
 import {useNavigate} from 'react-router-dom';
 
 const NewOrderDataStep :React.FC = () => {
+  const [formErrors, setFormErrors] = useState<string[]>([])
+
   const {title, info, date, address, cost, comment} = useAppSelector(state => state.orderSlice)
 
   const {setTitle, setInfo, setAddress, setDate, setCost, setComment} = orderActions
@@ -22,6 +24,37 @@ const NewOrderDataStep :React.FC = () => {
   const dispatch = useAppDispatch();
 
   const navigate  = useNavigate();
+
+  const handleGoNextStep = () => {
+    const errorsList :string[] = [];
+
+    if (!title) {
+      errorsList.push('wrong_title')
+    }
+
+    if (!info) {
+      errorsList.push('wrong_info')
+    }
+
+    if (!date) {
+      errorsList.push('wrong_date')
+    }
+
+    if (!address) {
+      errorsList.push('wrong_address')
+    }
+
+    if (!cost) {
+      errorsList.push('wrong_cost')
+    }
+
+    if (errorsList.length > 0) {
+      setFormErrors(errorsList)
+      return
+    } else {
+      navigate('/new-order/step-3')
+    }
+  }
 
   return (
     <DataOrderData>
@@ -31,22 +64,27 @@ const NewOrderDataStep :React.FC = () => {
       <DataContainer>
         <DataSpan>Главное о задаче</DataSpan>
         <DataInput
+          data-in-error={formErrors.includes('wrong_info')}
           placeholder={'Что требуется сделать?'}
           value={info}
           onChange={(e) => dispatch(setInfo(e.target.value))}
         />
         <DataMainInfoBlock>
           <DataInput
+            data-in-error={formErrors.includes('wrong_date')}
+            type={'date'}
             placeholder={'Когда нужна услуга?'}
             value={date}
             onChange={(e)  => dispatch(setDate(e.target.value))}
           />
           <DataInput
+            data-in-error={formErrors.includes('wrong_address')}
             placeholder={'Ваш адрес'}
             value={address}
             onChange={(e)   => dispatch(setAddress(e.target.value))}
           />
           <DataInput
+            data-in-error={formErrors.includes('wrong_cost')}
             placeholder={'Подходящая стоимость'}
             value={cost}
             type={'number'}
@@ -60,7 +98,7 @@ const NewOrderDataStep :React.FC = () => {
           value={comment}
           onChange={(e)  => dispatch(setComment(e.target.value))}
         />
-        <BasicButton onClick={() => navigate('/new-order/step-3')} size={'lg'} text={'Далее'} variant={'blue'}/>
+        <BasicButton onClick={handleGoNextStep} size={'lg'} text={'Далее'} variant={'blue'}/>
       </DataContainer>
     </DataOrderData>
   );

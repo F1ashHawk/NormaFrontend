@@ -1,37 +1,11 @@
-import  {useEffect, useRef, useState} from 'react';
-import {LogOutButton, StyledUserButton} from './styled';
-import CustomPopup from '../../UI/CustomPopup';
-import {Link} from 'react-router-dom';
+import { StyledUserButton} from './styled';
+import {useNavigate} from 'react-router-dom';
 
-interface IUserButtonProps {
-  handleLogOut: () => void;
-}
-
-const UserButton = ({handleLogOut}: IUserButtonProps) => {
-  const [openPopup, setOpenPopup] = useState(false);
-
-  const popupRef = useRef<HTMLDivElement>(null);
-
-  const togglePopup = () => {
-    setOpenPopup(!openPopup);
-  };
-
-  const handleClickOutside = (event: MouseEvent) => {
-    if (popupRef.current && !popupRef.current.contains(event.target as Node)) {
-      setOpenPopup(false);
-    }
-  };
-
-  useEffect(() => {
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, []);
+const UserButton = () => {
+  const navigate = useNavigate()
 
   return (
-    <>
-      <StyledUserButton onClick={togglePopup}>
+      <StyledUserButton onClick={() => navigate('/profile')}>
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <g id="User">
             <path id="Ellipse 45"
@@ -41,16 +15,7 @@ const UserButton = ({handleLogOut}: IUserButtonProps) => {
                     strokeLinecap="round"/>
           </g>
         </svg>
-        {openPopup &&
-          <CustomPopup ref={popupRef}>
-            <Link to={'/profile'}>Profile</Link>
-            <LogOutButton onClick={handleLogOut}>Log out</LogOutButton>
-          </CustomPopup>
-        }
       </StyledUserButton>
-    </>
-
-
   );
 };
 

@@ -9,7 +9,6 @@ interface IMyButton {
   variant: 'blue' | 'white' | 'red';
   title?: string
 }
-
 const BasicButton = ({onClick, text, size, disabled, variant, title}: IMyButton) => {
   return (
     <StyledButton
@@ -17,8 +16,7 @@ const BasicButton = ({onClick, text, size, disabled, variant, title}: IMyButton)
       data-size={size}
       disabled={disabled}
       data-variant={variant}
-      title={title}
-    >
+      title={title}>
       {text}
     </StyledButton>
   );
